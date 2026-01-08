@@ -4,40 +4,60 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 28 },
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.15,
-      duration: 0.6,
+      delay: i * 0.12,
+      duration: 0.55,
       ease: "easeOut",
     },
   }),
 };
 
+const container = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.12 },
+  },
+};
+
 export default function HomePage() {
   return (
-    <div className="space-y-28">
-
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="visible"
+      className="space-y-32"
+    >
       {/* HERO SECTION */}
-      <section className="text-center space-y-8 pt-28 relative overflow-hidden">
+      <section className="text-center space-y-8 pt-32 relative overflow-hidden">
 
-        {/* subtle background glow */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-20 left-1/2 -translate-x-1/2
-                          w-[600px] h-[300px]
-                          bg-gradient-to-r from-indigo-500/20 to-cyan-500/20
-                          blur-3xl rounded-full" />
-        </div>
+        {/* animated background glow */}
+        <motion.div
+          aria-hidden
+          className="absolute inset-0 -z-10"
+          animate={{ opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <div
+            className="
+              absolute top-24 left-1/2 -translate-x-1/2
+              w-[680px] h-[320px]
+              bg-gradient-to-r from-indigo-500/20 to-cyan-500/20
+              blur-3xl rounded-full
+            "
+          />
+        </motion.div>
 
         <motion.h1
           variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          className="text-4xl md:text-6xl font-bold
-                     bg-gradient-to-r from-indigo-600 to-cyan-600
-                     bg-clip-text text-transparent"
+          className="
+            text-4xl md:text-6xl font-bold
+            bg-gradient-to-r from-indigo-600 to-cyan-600
+            bg-clip-text text-transparent
+          "
         >
           OpsMind AI
         </motion.h1>
@@ -45,8 +65,6 @@ export default function HomePage() {
         <motion.p
           variants={fadeUp}
           custom={1}
-          initial="hidden"
-          animate="visible"
           className="text-xl md:text-2xl text-muted-foreground"
         >
           Answers you can trust. Powered by your SOPs.
@@ -55,8 +73,6 @@ export default function HomePage() {
         <motion.p
           variants={fadeUp}
           custom={2}
-          initial="hidden"
-          animate="visible"
           className="max-w-2xl mx-auto text-muted-foreground"
         >
           OpsMind AI is a context-aware corporate knowledge assistant that
@@ -67,25 +83,27 @@ export default function HomePage() {
         <motion.div
           variants={fadeUp}
           custom={3}
-          initial="hidden"
-          animate="visible"
           className="flex justify-center gap-4 pt-6"
         >
           <Link
             href="/chat"
-            className="bg-gradient-to-r from-indigo-600 to-cyan-600
-                       text-white px-6 py-3 rounded-md
-                       hover:opacity-90 transition-opacity"
+            className="
+              bg-gradient-to-r from-indigo-600 to-cyan-600
+              text-white px-7 py-3 rounded-md
+              hover:opacity-90 transition-opacity
+            "
           >
             Start Asking
           </Link>
 
           <Link
             href="/auth/login"
-            className="border px-6 py-3 rounded-md
-                       hover:border-indigo-500
-                       hover:text-indigo-600
-                       transition-colors"
+            className="
+              border px-7 py-3 rounded-md
+              hover:border-indigo-500
+              hover:text-indigo-600
+              transition-colors
+            "
           >
             Admin Login
           </Link>
@@ -112,11 +130,16 @@ export default function HomePage() {
             key={item.title}
             variants={fadeUp}
             custom={i}
-            initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="border rounded-xl p-6 space-y-3
-                       hover:shadow-lg transition-shadow"
+            whileHover={{ y: -4 }}
+            transition={{ duration: 0.25 }}
+            className="
+              border rounded-xl p-6 space-y-3
+              bg-white
+              hover:shadow-lg
+              transition-shadow
+            "
           >
             <h3 className="font-semibold text-lg">{item.title}</h3>
             <p className="text-sm text-muted-foreground">{item.desc}</p>
@@ -125,10 +148,9 @@ export default function HomePage() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="space-y-14">
+      <section className="space-y-16">
         <motion.h2
           variants={fadeUp}
-          initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           className="text-3xl font-bold text-center"
@@ -136,7 +158,7 @@ export default function HomePage() {
           How OpsMind AI Works
         </motion.h2>
 
-        <div className="grid md:grid-cols-3 gap-10 text-center">
+        <div className="grid md:grid-cols-3 gap-12 text-center">
           {[
             {
               step: "1",
@@ -158,14 +180,17 @@ export default function HomePage() {
               key={item.step}
               variants={fadeUp}
               custom={i}
-              initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               className="space-y-3"
             >
-              <span className="text-3xl font-bold
-                               bg-gradient-to-r from-indigo-600 to-cyan-600
-                               bg-clip-text text-transparent">
+              <span
+                className="
+                  text-3xl font-bold
+                  bg-gradient-to-r from-indigo-600 to-cyan-600
+                  bg-clip-text text-transparent
+                "
+              >
                 {item.step}
               </span>
               <h4 className="font-semibold">{item.title}</h4>
@@ -175,10 +200,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* TRUST SECTION */}
+      {/* TRUST */}
       <motion.section
         variants={fadeUp}
-        initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
         className="text-center space-y-4"
@@ -194,24 +218,24 @@ export default function HomePage() {
       {/* CTA */}
       <motion.section
         variants={fadeUp}
-        initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="text-center pb-28"
+        className="text-center pb-32"
       >
         <h2 className="text-3xl font-bold mb-6">
           Turn SOPs into Answers
         </h2>
         <Link
           href="/chat"
-          className="bg-gradient-to-r from-indigo-600 to-cyan-600
-                     text-white px-10 py-4 rounded-md text-lg
-                     hover:opacity-90 transition-opacity"
+          className="
+            bg-gradient-to-r from-indigo-600 to-cyan-600
+            text-white px-10 py-4 rounded-md text-lg
+            hover:opacity-90 transition-opacity
+          "
         >
           Launch OpsMind AI
         </Link>
       </motion.section>
-
-    </div>
+    </motion.div>
   );
 }
