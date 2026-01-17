@@ -32,7 +32,7 @@ export default function LoginPage() {
 
     try {
       setLoading(true);
-      const res = await api.post("/auth/signup", {
+      const res = await api.post("/auth/login", {
         email,
         password,
       });
