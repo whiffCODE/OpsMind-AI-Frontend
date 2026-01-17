@@ -36,7 +36,11 @@ export default function SignupPage() {
 
     try {
       setLoading(true);
-      await api.post("/auth/signup", { name, email, password });
+      await api.post("/auth/signup", {
+        name,
+        email,
+        password,
+      });
       router.push("/auth/login");
     } finally {
       setLoading(false);

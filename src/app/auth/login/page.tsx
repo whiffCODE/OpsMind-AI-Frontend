@@ -32,7 +32,10 @@ export default function LoginPage() {
 
     try {
       setLoading(true);
-      const res = await api.post("/auth/login", { email, password });
+      const res = aawait api.post("/auth/signup", {
+        email,
+        password,
+      });
       localStorage.setItem("token", res.data.token);
       router.push("/chat");
     } finally {
