@@ -1,28 +1,48 @@
 "use client";
 
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { getUserFromToken, logout } from "@/lib/auth";
 import { useEffect, useState } from "react";
 
-const navContainer = {
-  hidden: { opacity: 0, y: -16 },
+/* ---------------- Animations ---------------- */
+
+const navContainer: Variants = {
+  hidden: {
+    opacity: 0,
+    y: -16,
+  },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.4, ease: "easeOut" },
+    transition: {
+      duration: 0.4,
+      // ✅ FIX: easing array instead of string
+      ease: [0.16, 1, 0.3, 1],
+    },
   },
 };
 
-const dropdownVariants = {
-  hidden: { opacity: 0, y: -8, scale: 0.98 },
+const dropdownVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    y: -8,
+    scale: 0.98,
+  },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    transition: { duration: 0.2, ease: "easeOut" },
+    transition: {
+      duration: 0.2,
+      ease: [0.16, 1, 0.3, 1],
+    },
   },
-  exit: { opacity: 0, y: -8, scale: 0.98 },
+  exit: {
+    opacity: 0,
+    y: -8,
+    scale: 0.98,
+  },
 };
 
 export default function Navbar() {
@@ -39,13 +59,12 @@ export default function Navbar() {
       initial="hidden"
       animate="visible"
       className="
+        sticky top-0 z-50
         border-b bg-white/80 backdrop-blur
         supports-[backdrop-filter]:bg-white/60
-        sticky top-0 z-50
       "
     >
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-
         {/* Brand */}
         <Link
           href="/"
@@ -60,7 +79,6 @@ export default function Navbar() {
 
         {/* Right Section */}
         <div className="flex items-center gap-4">
-
           {/* Guest */}
           {!user && (
             <>

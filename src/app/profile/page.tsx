@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import api from "@/lib/api";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { useAuthGuard } from "@/lib/useAuthGuard";
 
 type Profile = {

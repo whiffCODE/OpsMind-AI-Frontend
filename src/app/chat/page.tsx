@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Variants, motion, AnimatePresence } from "framer-motion";
 import ChatInput from "@/components/Chat/ChatInput";
 import { ChatMessage as ChatMsg } from "@/types/chat";
 import api from "@/lib/api";
